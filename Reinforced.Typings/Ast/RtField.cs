@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Reinforced.Typings.Ast
 {
@@ -34,6 +36,8 @@ namespace Reinforced.Typings.Ast
                 yield return Type;
             }
         }
+
+        public Dictionary<string, RtField[]> Attributes { get; set; }
 
         /// <summary>
         /// Visitor acceptance

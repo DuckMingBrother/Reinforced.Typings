@@ -73,6 +73,33 @@ namespace Reinforced.Typings.Visitors
             if (node == null) return;
             Visit(node.Documentation);
             AppendTabs();
+
+            foreach (var att in node.Attributes) {
+                Write("@");
+                Write(att.Key);
+                Write("(");
+
+                if (att.Value.Length > 0) {
+                    Write("{");
+
+                    for (int i = 0; i < att.Value.Length; i++) {
+                        RtField field = att.Value[i];
+                        Visit(field.Identifier);
+                        Write(": ");
+                        Visit(field.Type);
+
+                        if (i != att.Value.Length - 1) {
+                            Write(", ");
+                        }
+                    }
+                    Write("}");
+                }
+
+                Write(")");
+                Br();
+                AppendTabs();
+            }
+
             if (Context != WriterContext.Interface) Modifiers(node);
             Visit(node.Identifier);
             Write(": ");
